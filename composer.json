@@ -1,0 +1,21 @@
+{
+  "name": "zndatabase/eloquent",
+  "type": "extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ZnDeveloper",
+      "email": "zndev@ya.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "illuminate/database": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "ZnDatabase\\Eloquent\\": "src",
+      "ZnDatabase\\Eloquent\\Tests\\": "tests"
+    }
+  }
+}
