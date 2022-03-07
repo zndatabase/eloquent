@@ -5,7 +5,7 @@ namespace ZnDatabase\Eloquent\Domain\Factories;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use ZnLib\Db\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Eloquent\Domain\Libs\ConfigBuilders\EloquentConfigBuilder;

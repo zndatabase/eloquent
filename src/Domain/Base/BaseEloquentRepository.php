@@ -15,7 +15,7 @@ use ZnCore\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\EntityManagerTrait;
-use ZnLib\Db\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
 use ZnDatabase\Base\Domain\Traits\MapperTrait;
