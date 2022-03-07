@@ -7,7 +7,7 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnLib\Db\Capsule\Manager;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
-use ZnLib\Db\Facades\DbFacade;
+use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Eloquent\Domain\Libs\ConfigBuilders\EloquentConfigBuilder;
 use ZnDatabase\Base\Domain\Libs\TableAlias;
 
