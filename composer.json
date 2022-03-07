@@ -10,6 +10,8 @@
   ],
   "minimum-stability": "dev",
   "require": {
+    "zndatabase/base": "dev-main",
+    "doctrine/dbal": "^2.10",
     "illuminate/database": "^6.3"
   },
   "autoload": {
