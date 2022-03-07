@@ -4,8 +4,8 @@ namespace ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder;
 
 use Illuminate\Database\Query\Builder;
 use ZnCore\Domain\Entities\Query\Join;
-use ZnLib\Db\Helpers\DbHelper;
-use ZnLib\Db\Interfaces\QueryBuilderInterface;
+use ZnDatabase\Base\Domain\Helpers\DbHelper;
+use ZnDatabase\Base\Domain\Interfaces\QueryBuilderInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Entities\Query\Where;
 
