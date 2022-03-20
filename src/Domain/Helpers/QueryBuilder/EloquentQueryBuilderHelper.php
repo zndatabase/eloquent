@@ -103,6 +103,13 @@ class EloquentQueryBuilderHelper implements QueryBuilderInterface
         if ( ! empty($queryArr[Query::OFFSET])) {
             $queryBuilder->offset($queryArr[Query::OFFSET]);
         }
+
+        if ($query->getLimit() !== null) {
+            $queryBuilder->limit($query->getLimit());
+        }
+        if ($query->getOffset() !== null) {
+            $queryBuilder->offset($query->getOffset());
+        }
     }
 
 }
