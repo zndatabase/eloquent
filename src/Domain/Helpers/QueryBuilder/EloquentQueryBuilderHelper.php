@@ -3,7 +3,10 @@
 namespace ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Str;
 use ZnCore\Domain\Entities\Query\Join;
+use ZnCore\Domain\Enums\OperatorEnum;
+use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Helpers\DbHelper;
 use ZnDatabase\Base\Domain\Interfaces\QueryBuilderInterface;
 use ZnCore\Domain\Libs\Query;
@@ -22,6 +25,8 @@ class EloquentQueryBuilderHelper implements QueryBuilderInterface
 
     public static function setWhere(Query $query, Builder $queryBuilder)
     {
+        $driver = $queryBuilder->getConnection()->getConfig('driver');
+
         $queryArr = $query->toArray();
         if ( ! empty($queryArr[Query::WHERE])) {
             foreach ($queryArr[Query::WHERE] as $key => $value) {
@@ -42,6 +47,9 @@ class EloquentQueryBuilderHelper implements QueryBuilderInterface
                 if (is_array($where->value)) {
                     $queryBuilder->whereIn($column, $where->value, $where->boolean, $where->not);
                 } else {
+                    if($where->operator == OperatorEnum::ILIKE && $driver == DbDriverEnum::SQLITE) {
+                        $where->operator = OperatorEnum::LIKE;
+                    }
                     $queryBuilder->where($column, $where->operator, $where->value, $where->boolean);
                 }
             }
