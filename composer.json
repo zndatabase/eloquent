@@ -10,7 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "zndatabase/base": "dev-main",
+    "zndatabase/base": "0.x-dev",
     "doctrine/dbal": "^2.10",
     "illuminate/database": "^6.3"
   },
