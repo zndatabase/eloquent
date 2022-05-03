@@ -81,7 +81,8 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     {
         $query = $this->forgeQuery($query);
         $queryFilter = $this->queryFilterInstance($query);
-        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
+//        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
+        $queryWithoutRelations = $query;
         $collection = $this->_all($queryWithoutRelations);
         $queryFilter->loadRelations($collection);
         return $collection;
@@ -313,7 +314,8 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     {
         $query = $this->forgeQuery($query);
         $queryFilter = $this->queryFilterInstance($query);
-        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
+//        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
+        $queryWithoutRelations = $query;
 //        $collection = $this->_all($queryWithoutRelations);
         $query = $this->forgeQuery($query);
         $queryBuilder = $this->getQueryBuilder();
