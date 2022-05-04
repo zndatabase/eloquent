@@ -114,12 +114,6 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         return $collection;
     }
 
-    public function setEntityClass(object $entityClass): void
-    {
-        DeprecateHelper::softThrow();
-        $this->entityClassName = $entityClass;
-    }
-
     public function getEntityClass(): string
     {
         return $this->entityClassName;
