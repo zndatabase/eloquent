@@ -5,6 +5,7 @@ namespace ZnDatabase\Eloquent\Domain\Factories;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
@@ -43,7 +44,7 @@ class ManagerFactory
     {
         foreach ($connections as $connectionName => $connectionConfig) {
             if ($connectionConfig['driver'] == DbDriverEnum::SQLITE) {
-                FileHelper::touch($connectionConfig['database']);
+                FileStorageHelper::touch($connectionConfig['database']);
             }
         }
     }
