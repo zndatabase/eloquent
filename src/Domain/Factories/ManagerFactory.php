@@ -44,7 +44,7 @@ class ManagerFactory
     {
         foreach ($connections as $connectionName => $connectionConfig) {
             if ($connectionConfig['driver'] == DbDriverEnum::SQLITE) {
-                FileStorageHelper::touch($connectionConfig['database']);
+                FileStorageHelper::touchFile($connectionConfig['database']);
             }
         }
     }
