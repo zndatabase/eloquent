@@ -9,7 +9,7 @@ use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
