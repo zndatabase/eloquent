@@ -9,11 +9,12 @@ use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Libs\Text\Helpers\StringHelper;
+
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+use ZnCore\Base\Libs\Text\Helpers\TextHelper;
 use ZnCore\Domain\Enums\EventEnum;
 use ZnCore\Domain\Enums\OperatorEnum;
 use ZnCore\Domain\Events\EntityEvent;
@@ -158,7 +159,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
             $this->checkExists($entity);
             if ($_ENV['APP_DEBUG']) {
                 $message = $e->getMessage();
-                $message = StringHelper::removeDoubleSpace($message);
+                $message = TextHelper::removeDoubleSpace($message);
                 $message = str_replace("'", "\\'", $message);
                 $message = trim($message);
             } else {
