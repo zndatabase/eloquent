@@ -24,7 +24,7 @@ use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Helpers\FilterModelHelper;
 use ZnCore\Domain\Helpers\ValidationHelper;
 use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
-use ZnCore\Domain\Interfaces\Entity\UniqueInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
 use ZnCore\Contract\Domain\Interfaces\ForgeQueryByFilterInterface;
 use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
 use ZnCore\Domain\Interfaces\Repository\ReadOneUniqueInterface;
