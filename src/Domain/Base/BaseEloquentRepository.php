@@ -12,9 +12,9 @@ use ZnCore\Domain\Enums\EventEnum;
 use ZnCore\Domain\Events\EntityEvent;
 use ZnCore\Domain\Events\QueryEvent;
 use ZnCore\Domain\Interfaces\GetEntityClassInterface;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
-use ZnCore\Domain\Traits\EntityManagerTrait;
+use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
@@ -27,7 +27,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
     use EventDispatcherTrait;
     use EloquentTrait;
     use TableNameTrait;
-    use EntityManagerTrait;
+    use EntityManagerAwareTrait;
     use MapperTrait;
 
 //    protected $autoIncrement = 'id';
