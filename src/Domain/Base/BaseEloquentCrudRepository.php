@@ -16,7 +16,7 @@ use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Base\Libs\Text\Helpers\TextHelper;
 use ZnCore\Domain\Enums\EventEnum;
-use ZnCore\Domain\Enums\OperatorEnum;
+use ZnCore\Base\Libs\Query\Enums\OperatorEnum;
 use ZnCore\Domain\Events\EntityEvent;
 use ZnCore\Domain\Events\QueryEvent;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
@@ -28,7 +28,7 @@ use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
 use ZnCore\Contract\Domain\Interfaces\ForgeQueryByFilterInterface;
 use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
 use ZnCore\Domain\Interfaces\Repository\ReadOneUniqueInterface;
-use ZnCore\Domain\Libs\Query;
+use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Base\Domain\Libs\QueryFilter;
 
