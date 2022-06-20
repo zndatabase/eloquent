@@ -2,15 +2,14 @@
 
 namespace ZnDatabase\Eloquent\Domain\Factories;
 
-use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
-use ZnDatabase\Eloquent\Domain\Capsule\Manager;
+use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
-use ZnDatabase\Eloquent\Domain\Libs\ConfigBuilders\EloquentConfigBuilder;
 use ZnDatabase\Base\Domain\Libs\TableAlias;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Libs\ConfigBuilders\EloquentConfigBuilder;
 
 class ManagerFactory
 {
@@ -23,7 +22,8 @@ class ManagerFactory
 
     public static function createManagerFromConnections(array $connections): Manager
     {
-        $config = LoadHelper::loadConfig($_ENV['ELOQUENT_CONFIG_FILE']);
+        $config = StoreHelper::load($_ENV['ROOT_DIRECTORY'] . '/' . $_ENV['ELOQUENT_CONFIG_FILE']);
+//        $config = LoadHelper::loadConfig($_ENV['ELOQUENT_CONFIG_FILE']);
         $connectionMap = ArrayHelper::getValue($config, 'connection.connectionMap', []);
 
         $map = ArrayHelper::getValue($config, 'connection.map', []);
