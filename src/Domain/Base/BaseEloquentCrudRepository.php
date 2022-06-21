@@ -21,7 +21,7 @@ use ZnCore\Domain\Events\EntityEvent;
 use ZnCore\Domain\Events\QueryEvent;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Domain\Helpers\FilterModelHelper;
+use ZnCore\Base\Libs\QueryFilter\Helpers\FilterModelHelper;
 use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
 use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
