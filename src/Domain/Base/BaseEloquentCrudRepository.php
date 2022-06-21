@@ -23,9 +23,9 @@ use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\QueryFilter\Helpers\FilterModelHelper;
 use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
-use ZnCore\Contract\Domain\Interfaces\ForgeQueryByFilterInterface;
+use ZnCore\Base\Libs\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\ReadOneUniqueInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
@@ -243,7 +243,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
                 $item = Inflector::underscore($item);
             }
         }
-        /*if(!empty($this->getEntityClass()) && ClassHelper::instanceOf($this->getEntityClass(), \ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface::class, true)) {
+        /*if(!empty($this->getEntityClass()) && ClassHelper::instanceOf($this->getEntityClass(), \ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface::class, true)) {
             ArrayHelper::removeByValue('id', $columnList);
         }*/
         /*if ($this->autoIncrement()) {

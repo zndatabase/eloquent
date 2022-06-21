@@ -18,7 +18,7 @@ use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
-use ZnDatabase\Base\Domain\Traits\MapperTrait;
+use ZnCore\Base\Libs\Repository\Traits\MapperTrait;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 
 abstract class BaseEloquentRepository implements GetEntityClassInterface
