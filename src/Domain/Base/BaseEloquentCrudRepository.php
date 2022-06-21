@@ -5,6 +5,7 @@ namespace ZnDatabase\Eloquent\Domain\Base;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
@@ -27,12 +28,12 @@ use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
 use ZnCore\Base\Libs\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
-use ZnCore\Base\Libs\Repository\Interfaces\ReadOneUniqueInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\FindOneUniqueInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnCore\Base\Libs\Relation\Libs\QueryFilter;
 
-abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, ReadOneUniqueInterface
+abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, FindOneUniqueInterface
 {
 
     protected $primaryKey = ['id'];
@@ -78,7 +79,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         return $queryBuilder->count();
     }
 
-    public function all(Query $query = null)
+    public function all(Query $query = null): Enumerable
     {
         $query = $this->forgeQuery($query);
         $queryFilter = $this->queryFilterInstance($query);
