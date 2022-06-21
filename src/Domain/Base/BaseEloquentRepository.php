@@ -54,7 +54,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
      * @param Query|null $query
      * @return Query
      */
-    protected function forgeQuery(Query $query = null)
+    protected function forgeQuery(Query $query = null): Query
     {
         $query = Query::forge($query);
         $this->dispatchQueryEvent($query, EventEnum::BEFORE_FORGE_QUERY);
@@ -90,7 +90,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         ];
     }*/
 
-    protected function _all(Query $query = null)
+    protected function findBy(Query $query = null)
     {
         $query = $this->forgeQuery($query);
         $queryBuilder = $this->getQueryBuilder();

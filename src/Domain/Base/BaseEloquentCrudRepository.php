@@ -85,7 +85,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         $queryFilter = $this->queryFilterInstance($query);
 //        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
         $queryWithoutRelations = $query;
-        $collection = $this->_all($queryWithoutRelations);
+        $collection = $this->findBy($queryWithoutRelations);
         $queryFilter->loadRelations($collection);
         return $collection;
     }
@@ -122,7 +122,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         return $entity;
     }
 
-    public function checkExists(EntityIdInterface $entity)
+    public function checkExists(EntityIdInterface $entity): void
     {
         try {
             $existedEntity = $this->oneByUnique($entity);
