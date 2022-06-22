@@ -16,22 +16,22 @@ use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Base\Libs\Text\Helpers\TextHelper;
-use ZnCore\Base\Libs\Domain\Enums\EventEnum;
-use ZnCore\Base\Libs\Query\Enums\OperatorEnum;
-use ZnCore\Base\Libs\Domain\Events\EntityEvent;
-use ZnCore\Base\Libs\Domain\Events\QueryEvent;
+use ZnCore\Domain\Domain\Enums\EventEnum;
+use ZnCore\Domain\Query\Enums\OperatorEnum;
+use ZnCore\Domain\Domain\Events\EntityEvent;
+use ZnCore\Domain\Domain\Events\QueryEvent;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Base\Libs\QueryFilter\Helpers\FilterModelHelper;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\QueryFilter\Helpers\FilterModelHelper;
 use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
-use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
-use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
-use ZnCore\Base\Libs\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
-use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
-use ZnCore\Base\Libs\Repository\Interfaces\FindOneUniqueInterface;
-use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
+use ZnCore\Domain\Entity\Interfaces\UniqueInterface;
+use ZnCore\Domain\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
+use ZnCore\Domain\Repository\Interfaces\CrudRepositoryInterface;
+use ZnCore\Domain\Repository\Interfaces\FindOneUniqueInterface;
+use ZnCore\Domain\Query\Entities\Query;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
-use ZnCore\Base\Libs\Relation\Libs\QueryFilter;
+use ZnCore\Domain\Relation\Libs\QueryFilter;
 
 abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, FindOneUniqueInterface
 {
@@ -244,7 +244,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
                 $item = Inflector::underscore($item);
             }
         }
-        /*if(!empty($this->getEntityClass()) && ClassHelper::instanceOf($this->getEntityClass(), \ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface::class, true)) {
+        /*if(!empty($this->getEntityClass()) && ClassHelper::instanceOf($this->getEntityClass(), \ZnCore\Domain\Entity\Interfaces\EntityIdInterface::class, true)) {
             ArrayHelper::removeByValue('id', $columnList);
         }*/
         /*if ($this->autoIncrement()) {

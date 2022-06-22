@@ -3,7 +3,7 @@
 namespace ZnDatabase\Eloquent\Domain\Orm;
 
 use Illuminate\Support\Facades\DB;
-use ZnCore\Base\Libs\EntityManager\Interfaces\OrmInterface;
+use ZnCore\Domain\EntityManager\Interfaces\OrmInterface;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 
 class EloquentOrm implements OrmInterface

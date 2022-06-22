@@ -8,17 +8,17 @@ use Illuminate\Database\Schema\Builder as SchemaBuilder;
 use Illuminate\Support\Collection;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
-use ZnCore\Base\Libs\Domain\Enums\EventEnum;
-use ZnCore\Base\Libs\Domain\Events\EntityEvent;
-use ZnCore\Base\Libs\Domain\Events\QueryEvent;
-use ZnCore\Base\Libs\Domain\Interfaces\GetEntityClassInterface;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
-use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
+use ZnCore\Domain\Domain\Enums\EventEnum;
+use ZnCore\Domain\Domain\Events\EntityEvent;
+use ZnCore\Domain\Domain\Events\QueryEvent;
+use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\Query\Entities\Query;
+use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
-use ZnCore\Base\Libs\Repository\Traits\MapperTrait;
+use ZnCore\Domain\Repository\Traits\MapperTrait;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 
 abstract class BaseEloquentRepository implements GetEntityClassInterface
