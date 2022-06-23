@@ -15,6 +15,7 @@ use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryDispatchEventTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
@@ -29,6 +30,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
     use TableNameTrait;
     use EntityManagerAwareTrait;
     use MapperTrait;
+    use RepositoryDispatchEventTrait;
 
 //    protected $autoIncrement = 'id';
     private $entityClassName;
@@ -119,19 +121,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         return $this->entityClassName;
     }
 
-    protected function dispatchQueryEvent(Query $query, string $eventName): QueryEvent
-    {
-        $event = new QueryEvent($query);
-        $this->getEventDispatcher()->dispatch($event, $eventName);
-        return $event;
-    }
 
-    protected function dispatchEntityEvent(object $entity, string $eventName): EntityEvent
-    {
-        $event = new EntityEvent($entity);
-        $this->getEventDispatcher()->dispatch($event, $eventName);
-        return $event;
-    }
 
     /*protected function oneByBuilder(QueryBuilder $queryBuilder)
     {
