@@ -7,12 +7,12 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
 use ZnCore\Domain\Entity\Exceptions\AlreadyExistsException;
-use ZnCore\Base\Exceptions\InvalidMethodParameterException;
+use ZnCore\Contract\Common\Exceptions\InvalidMethodParameterException;
 use ZnCore\Domain\Entity\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Text\Helpers\Inflector;
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Base\Libs\Text\Helpers\TextHelper;
