@@ -6,10 +6,10 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
-use ZnCore\Base\Exceptions\AlreadyExistsException;
+use ZnCore\Domain\Entity\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
-use ZnCore\Base\Exceptions\NotFoundException;
-use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Domain\Entity\Exceptions\NotFoundException;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;

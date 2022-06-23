@@ -6,7 +6,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Schema\Builder as SchemaBuilder;
 use Illuminate\Support\Collection;
-use ZnCore\Base\Helpers\DeprecateHelper;
+use ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Domain\Domain\Enums\EventEnum;
 use ZnCore\Domain\Domain\Events\EntityEvent;
