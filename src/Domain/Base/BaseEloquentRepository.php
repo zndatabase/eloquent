@@ -102,11 +102,11 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         EloquentQueryBuilderHelper::setOrder($query, $queryBuilder);
         EloquentQueryBuilderHelper::setGroupBy($query, $queryBuilder);
         EloquentQueryBuilderHelper::setPaginate($query, $queryBuilder);
-        $collection = $this->allByBuilder($queryBuilder);
+        $collection = $this->findByBuilder($queryBuilder);
         return $collection;
     }
 
-    protected function allByBuilder(QueryBuilder $queryBuilder): Collection
+    protected function findByBuilder(QueryBuilder $queryBuilder): Collection
     {
         $postCollection = $queryBuilder->get();
         $array = $postCollection->toArray();
