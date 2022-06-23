@@ -2,9 +2,9 @@
 
 namespace ZnDatabase\Eloquent\Domain\Factories;
 
-use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
-use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\FileSystem\Helpers\FileStorageHelper;
+use ZnCore\Base\Store\Helpers\StoreHelper;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Base\Domain\Libs\TableAlias;
