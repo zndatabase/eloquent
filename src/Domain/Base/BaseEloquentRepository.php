@@ -11,11 +11,10 @@ use ZnCore\Domain\Domain\Traits\ForgeQueryTrait;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnCore\Domain\Query\Entities\Query;
-use ZnCore\Domain\Repository\Traits\MapperTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryMapperTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryDispatchEventTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryQueryTrait;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
-use ZnCore\Domain\Repository\Traits\RepositoryQueryFilterTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
@@ -26,7 +25,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
     use EloquentTrait;
     use TableNameTrait;
     use EntityManagerAwareTrait;
-    use MapperTrait;
+    use RepositoryMapperTrait;
     use DispatchEventTrait;
     use ForgeQueryTrait;
 
