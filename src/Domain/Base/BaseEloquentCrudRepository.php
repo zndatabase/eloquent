@@ -94,20 +94,31 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
 //        $queryFilter = $this->queryFilterInstance($query);
 //        $queryFilter->loadRelations($collection);
 
-        if (method_exists($this, 'relations')) {
-            $relationLoader = new RelationLoader();
-            $relationLoader->setRelations($this->relations());
-            $relationLoader->setRepository($this);
-            $relationLoader->loadRelations($collection, $query);
-        }
+
+
+//        dump($query->getWith() ?: []);
+
+        $this->loadRelations($collection, $query->getWith() ?: []);
 
         return $collection;
     }
+//    public function loadRelationsByQuery(Collection $collection, Query $query)
 
-    /*public function loadRelations(Collection $collection, array $with)
+    public function loadRelations(Collection $collection, array $with)
     {
-
-    }*/
+        if (method_exists($this, 'relations')) {
+            $relations = $this->relations();
+            if(empty($relations)) {
+                return;
+            }
+            $query = new Query();
+            $query->with($with);
+            $relationLoader = new RelationLoader();
+            $relationLoader->setRelations($relations);
+            $relationLoader->setRepository($this);
+            $relationLoader->loadRelations($collection, $query);
+        }
+    }
 
     public function oneById($id, Query $query = null): EntityIdInterface
     {
