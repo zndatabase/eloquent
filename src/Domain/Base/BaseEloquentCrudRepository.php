@@ -27,14 +27,30 @@ use ZnCore\Base\Validation\Helpers\ValidationHelper;
 use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Domain\Entity\Interfaces\UniqueInterface;
 use ZnCore\Domain\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
+use ZnCore\Domain\Repository\Helpers\RepositoryUniqueHelper;
 use ZnCore\Domain\Repository\Interfaces\CrudRepositoryInterface;
 use ZnCore\Domain\Repository\Interfaces\FindOneUniqueInterface;
 use ZnCore\Domain\Query\Entities\Query;
+use ZnCore\Domain\Repository\Traits\RepositoryDeleteTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryFindAllTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryFindOneTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryQueryFilterTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryRelationTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryUpdateTrait;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnCore\Domain\Relation\Libs\QueryFilter;
 
 abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, FindOneUniqueInterface
 {
+
+    use RepositoryQueryFilterTrait;
+    use RepositoryRelationTrait;
+
+//    use RepositoryFindOneTrait;
+//    use RepositoryFindAllTrait;
+//    use RepositoryUpdateTrait;
+//    use RepositoryDeleteTrait;
+//
 
     protected $primaryKey = ['id'];
 
@@ -58,14 +74,6 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         FilterModelHelper::forgeCondition($query, $filterModel, $columnList);
     }
 
-//    protected function queryFilterInstance(Query $query = null)
-//    {
-//        $query = $this->forgeQuery($query);
-//        /** @var QueryFilter $queryFilter */
-//        $queryFilter = new QueryFilter($this, $query);
-//        return $queryFilter;
-//    }
-
     public function count(Query $query = null): int
     {
         $query = $this->forgeQuery($query);
@@ -79,21 +87,19 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     public function all(Query $query = null): Enumerable
     {
         $query = $this->forgeQuery($query);
-        $queryFilter = $this->queryFilterInstance($query);
-//        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
-//        $queryWithoutRelations = $query;
         $collection = $this->findBy($query);
+        $queryFilter = $this->queryFilterInstance($query);
         $queryFilter->loadRelations($collection);
         return $collection;
     }
 
-    public function loadRelations(Collection $collection, array $with)
+    /*public function loadRelations(Collection $collection, array $with)
     {
         $query = $this->forgeQuery();
         $query->with($with);
         $queryFilter = $this->queryFilterInstance($query);
         $queryFilter->loadRelations($collection);
-    }
+    }*/
 
     public function oneById($id, Query $query = null): EntityIdInterface
     {
@@ -145,15 +151,11 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
             if ($event->isPropagationStopped()) {
                 return $entity;
             }
-
             $lastId = $queryBuilder->insertGetId($arraySnakeCase);
             $entity->setId($lastId);
-
             $event = $this->dispatchEntityEvent($entity, EventEnum::AFTER_CREATE_ENTITY);
-
         } catch (QueryException $e) {
             $errors = new UnprocessibleEntityException;
-
             $this->checkExists($entity);
             if ($_ENV['APP_DEBUG']) {
                 $message = $e->getMessage();
@@ -312,7 +314,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     public function updateByQuery(Query $query, array $values)
     {
         $query = $this->forgeQuery($query);
-        $queryFilter = $this->queryFilterInstance($query);
+//        $queryFilter = $this->queryFilterInstance($query);
 //        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
         $queryWithoutRelations = $query;
 //        $collection = $this->_all($queryWithoutRelations);

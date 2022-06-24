@@ -27,7 +27,6 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
     use MapperTrait;
     use DispatchEventTrait;
     use ForgeQueryTrait;
-    use RepositoryQueryFilterTrait;
 
     public function __construct(EntityManagerInterface $em, Manager $capsule)
     {
