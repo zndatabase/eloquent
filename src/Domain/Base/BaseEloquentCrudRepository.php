@@ -47,7 +47,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     use RepositoryQueryFilterTrait;
     use RepositoryRelationTrait;
 
-//    use RepositoryFindOneTrait;
+    use RepositoryFindOneTrait;
     use RepositoryFindAllTrait;
     use RepositoryUpdateTrait;
     use RepositoryDeleteTrait;
@@ -93,7 +93,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         return $collection;
     }*/
 
-    public function oneById($id, Query $query = null): EntityIdInterface
+    /*public function oneById($id, Query $query = null): EntityIdInterface
     {
         if (empty($id)) {
             throw (new InvalidMethodParameterException('Empty ID'))
@@ -131,6 +131,38 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         }
     }
 
+    public function oneByUnique(UniqueInterface $entity): EntityIdInterface
+    {
+        $unique = $entity->unique();
+        if (!empty($unique)) {
+            foreach ($unique as $uniqueConfig) {
+                $oneEntity = $this->oneByUniqueGroup($entity, $uniqueConfig);
+                if($oneEntity) {
+                    return $oneEntity;
+                }
+            }
+        }
+        throw new NotFoundException();
+    }
+
+    private function oneByUniqueGroup(UniqueInterface $entity, $uniqueConfig): ?EntityIdInterface
+    {
+        $isBreak = false;
+        $query = new Query();
+        foreach ($uniqueConfig as $uniqueName) {
+            $value = EntityHelper::getValue($entity, $uniqueName);
+            if($value === null) {
+                return null;
+            }
+            $query->where(Inflector::underscore($uniqueName), $value);
+        }
+        $all = $this->all($query);
+        if ($all->count() > 0) {
+            return $all->first();
+        }
+        return null;
+    }*/
+
     public function create(EntityIdInterface $entity)
     {
         ValidationHelper::validateEntity($entity);
@@ -160,38 +192,6 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
             $errors->add('', $message);
             throw $errors;
         }
-    }
-
-    private function oneByUniqueGroup(UniqueInterface $entity, $uniqueConfig): ?EntityIdInterface
-    {
-        $isBreak = false;
-        $query = new Query();
-        foreach ($uniqueConfig as $uniqueName) {
-            $value = EntityHelper::getValue($entity, $uniqueName);
-            if($value === null) {
-                return null;
-            }
-            $query->where(Inflector::underscore($uniqueName), $value);
-        }
-        $all = $this->all($query);
-        if ($all->count() > 0) {
-            return $all->first();
-        }
-        return null;
-    }
-
-    public function oneByUnique(UniqueInterface $entity): EntityIdInterface
-    {
-        $unique = $entity->unique();
-        if (!empty($unique)) {
-            foreach ($unique as $uniqueConfig) {
-                $oneEntity = $this->oneByUniqueGroup($entity, $uniqueConfig);
-                if($oneEntity) {
-                    return $oneEntity;
-                }
-            }
-        }
-        throw new NotFoundException();
     }
 
     public function createCollection(Collection $collection)
