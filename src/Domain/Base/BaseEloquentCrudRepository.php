@@ -89,35 +89,8 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     {
         $query = $this->forgeQuery($query);
         $collection = $this->findBy($query);
-
-//        $queryFilter = new QueryFilter($this, $query);
-//        $queryFilter = $this->queryFilterInstance($query);
-//        $queryFilter->loadRelations($collection);
-
-
-
-//        dump($query->getWith() ?: []);
-
-        $this->loadRelations($collection, $query->getWith() ?: []);
-
+        $this->loadRelationsByQuery($collection, $query);
         return $collection;
-    }
-//    public function loadRelationsByQuery(Collection $collection, Query $query)
-
-    public function loadRelations(Collection $collection, array $with)
-    {
-        if (method_exists($this, 'relations')) {
-            $relations = $this->relations();
-            if(empty($relations)) {
-                return;
-            }
-            $query = new Query();
-            $query->with($with);
-            $relationLoader = new RelationLoader();
-            $relationLoader->setRelations($relations);
-            $relationLoader->setRepository($this);
-            $relationLoader->loadRelations($collection, $query);
-        }
     }
 
     public function oneById($id, Query $query = null): EntityIdInterface
@@ -185,25 +158,6 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
                 $message = 'Database error!';
             }
             $errors->add('', $message);
-
-
-            /*try {
-
-            } catch (AlreadyExistsException $e) {
-                if ($entity instanceof UniqueInterface) {
-                    $unique = $entity->unique();
-                    if ($unique) {
-                        foreach ($unique as $attributeNames) {
-                            foreach ($attributeNames as $attributeName) {
-                                $errors->add($attributeName, $e->getMessage());
-                            }
-                        }
-                    }
-                }
-                if ($errors->getErrorCollection()->isEmpty()) {
-                    $errors->add('', $e->getMessage());
-                }
-            }*/
             throw $errors;
         }
     }
