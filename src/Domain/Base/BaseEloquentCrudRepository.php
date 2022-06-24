@@ -38,11 +38,6 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
 
     protected $primaryKey = ['id'];
 
-    /*public function _relations()
-    {
-        return [];
-    }*/
-
     public function primaryKey()
     {
         return $this->primaryKey;
@@ -55,19 +50,21 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         $query = $this->forgeQuery($query);
         $event = new QueryEvent($query);
         $event->setFilterModel($filterModel);
-        $this->getEventDispatcher()->dispatch($event, EventEnum::BEFORE_FORGE_QUERY_BY_FILTER);
+        $this
+            ->getEventDispatcher()
+            ->dispatch($event, EventEnum::BEFORE_FORGE_QUERY_BY_FILTER);
         $schema = $this->getSchema();
         $columnList = $schema->getColumnListing($this->tableNameAlias());
         FilterModelHelper::forgeCondition($query, $filterModel, $columnList);
     }
 
-    protected function queryFilterInstance(Query $query = null)
-    {
-        $query = $this->forgeQuery($query);
-        /** @var QueryFilter $queryFilter */
-        $queryFilter = new QueryFilter($this, $query);
-        return $queryFilter;
-    }
+//    protected function queryFilterInstance(Query $query = null)
+//    {
+//        $query = $this->forgeQuery($query);
+//        /** @var QueryFilter $queryFilter */
+//        $queryFilter = new QueryFilter($this, $query);
+//        return $queryFilter;
+//    }
 
     public function count(Query $query = null): int
     {
@@ -84,8 +81,8 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         $query = $this->forgeQuery($query);
         $queryFilter = $this->queryFilterInstance($query);
 //        $queryWithoutRelations = $queryFilter->getQueryWithoutRelations();
-        $queryWithoutRelations = $query;
-        $collection = $this->findBy($queryWithoutRelations);
+//        $queryWithoutRelations = $query;
+        $collection = $this->findBy($query);
         $queryFilter->loadRelations($collection);
         return $collection;
     }

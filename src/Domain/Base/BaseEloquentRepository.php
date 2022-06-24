@@ -6,6 +6,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Schema\Builder as SchemaBuilder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
 use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Domain\Domain\Enums\EventEnum;
@@ -16,6 +17,7 @@ use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryDispatchEventTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryQueryTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
@@ -25,15 +27,16 @@ use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 abstract class BaseEloquentRepository implements GetEntityClassInterface
 {
 
-    use EventDispatcherTrait;
+//    use EventDispatcherTrait;
     use EloquentTrait;
     use TableNameTrait;
     use EntityManagerAwareTrait;
     use MapperTrait;
     use RepositoryDispatchEventTrait;
+    use RepositoryQueryTrait;
 
 //    protected $autoIncrement = 'id';
-    private $entityClassName;
+    //private $entityClassName;
 
     public function __construct(EntityManagerInterface $em, Manager $capsule)
     {
@@ -41,27 +44,17 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         $this->setEntityManager($em);
     }
 
-    /*public function autoIncrement()
+    /*public function getEntityClass(): string
     {
-        return $this->autoIncrement;
+        return $this->entityClassName;
     }*/
 
-    /*public function getConnection(): Connection
-    {
-        $connection = $this->capsule->getConnection($this->connectionName());
-        return $connection;
-    }*/
-
-    /**
-     * @param Query|null $query
-     * @return Query
-     */
-    protected function forgeQuery(Query $query = null): Query
+    /*protected function forgeQuery(Query $query = null): Query
     {
         $query = Query::forge($query);
         $this->dispatchQueryEvent($query, EventEnum::BEFORE_FORGE_QUERY);
         return $query;
-    }
+    }*/
 
     protected function forgeQueryBuilder(QueryBuilder $queryBuilder, Query $query)
     {
@@ -74,25 +67,9 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
     protected function getQueryBuilder(): QueryBuilder
     {
         return $this->getQueryBuilderByTableName($this->tableName());
-//        $connection = $this->getConnection();
-//        $queryBuilder = $connection->table($this->tableNameAlias(), null);
-//        return $queryBuilder;
     }
 
-    /*protected function getSchema(): SchemaBuilder
-    {
-        $connection = $this->getConnection();
-        $schema = $connection->getSchemaBuilder();
-        return $schema;
-    }*/
-
-    /*function getAttributeMap(): array {
-        return [
-
-        ];
-    }*/
-
-    protected function findBy(Query $query = null)
+    protected function findBy(Query $query = null): Enumerable
     {
         $query = $this->forgeQuery($query);
         $queryBuilder = $this->getQueryBuilder();
@@ -115,21 +92,4 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         $collection = $this->mapperDecodeCollection($array);
         return $collection;
     }
-
-    public function getEntityClass(): string
-    {
-        return $this->entityClassName;
-    }
-
-
-
-    /*protected function oneByBuilder(QueryBuilder $queryBuilder)
-    {
-        $item = $queryBuilder->first();
-        if (empty($item)) {
-            throw new NotFoundException('Not found entity!');
-        }
-        return $this->forgeEntity($item);
-    }*/
-
 }
