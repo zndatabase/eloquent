@@ -27,6 +27,7 @@ use ZnCore\Base\Validation\Helpers\ValidationHelper;
 use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Domain\Entity\Interfaces\UniqueInterface;
 use ZnCore\Domain\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
+use ZnCore\Domain\Relation\Libs\RelationLoader;
 use ZnCore\Domain\Repository\Helpers\RepositoryUniqueHelper;
 use ZnCore\Domain\Repository\Interfaces\CrudRepositoryInterface;
 use ZnCore\Domain\Repository\Interfaces\FindOneUniqueInterface;
@@ -88,17 +89,24 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     {
         $query = $this->forgeQuery($query);
         $collection = $this->findBy($query);
-        $queryFilter = $this->queryFilterInstance($query);
-        $queryFilter->loadRelations($collection);
+
+//        $queryFilter = new QueryFilter($this, $query);
+//        $queryFilter = $this->queryFilterInstance($query);
+//        $queryFilter->loadRelations($collection);
+
+        if (method_exists($this, 'relations')) {
+            $relationLoader = new RelationLoader();
+            $relationLoader->setRelations($this->relations());
+            $relationLoader->setRepository($this);
+            $relationLoader->loadRelations($collection, $query);
+        }
+
         return $collection;
     }
 
     /*public function loadRelations(Collection $collection, array $with)
     {
-        $query = $this->forgeQuery();
-        $query->with($with);
-        $queryFilter = $this->queryFilterInstance($query);
-        $queryFilter->loadRelations($collection);
+
     }*/
 
     public function oneById($id, Query $query = null): EntityIdInterface
