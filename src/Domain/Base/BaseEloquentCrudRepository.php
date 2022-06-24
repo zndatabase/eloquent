@@ -22,6 +22,7 @@ use ZnCore\Domain\Repository\Interfaces\FindOneUniqueInterface;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryDeleteTrait;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryFindAllTrait;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryFindOneTrait;
+use ZnCore\Domain\Repository\Traits\CrudRepositoryInsertTrait;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryUpdateTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryRelationTrait;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
@@ -33,6 +34,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
 
     use CrudRepositoryFindOneTrait;
     use CrudRepositoryFindAllTrait;
+    use CrudRepositoryInsertTrait;
     use CrudRepositoryUpdateTrait;
     use CrudRepositoryDeleteTrait;
 
@@ -66,21 +68,11 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         return $queryBuilder->count();
     }
 
-    public function create(EntityIdInterface $entity)
-    {
-        ValidationHelper::validateEntity($entity);
-
+    protected function insertRaw($entity): void {
         $arraySnakeCase = $this->mapperEncodeEntity($entity);
-        $queryBuilder = $this->getQueryBuilder();
         try {
-
-            $event = $this->dispatchEntityEvent($entity, EventEnum::BEFORE_CREATE_ENTITY);
-            if ($event->isPropagationStopped()) {
-                return $entity;
-            }
-            $lastId = $queryBuilder->insertGetId($arraySnakeCase);
+            $lastId = $this->getQueryBuilder()->insertGetId($arraySnakeCase);
             $entity->setId($lastId);
-            $event = $this->dispatchEntityEvent($entity, EventEnum::AFTER_CREATE_ENTITY);
         } catch (QueryException $e) {
             $errors = new UnprocessibleEntityException;
             $this->checkExists($entity);
