@@ -48,9 +48,9 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     use RepositoryRelationTrait;
 
 //    use RepositoryFindOneTrait;
-//    use RepositoryFindAllTrait;
-//    use RepositoryUpdateTrait;
-//    use RepositoryDeleteTrait;
+    use RepositoryFindAllTrait;
+    use RepositoryUpdateTrait;
+    use RepositoryDeleteTrait;
 //
 
     protected $primaryKey = ['id'];
@@ -85,13 +85,13 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         return $queryBuilder->count();
     }
 
-    public function all(Query $query = null): Enumerable
+    /*public function all(Query $query = null): Enumerable
     {
         $query = $this->forgeQuery($query);
         $collection = $this->findBy($query);
         $this->loadRelationsByQuery($collection, $query);
         return $collection;
-    }
+    }*/
 
     public function oneById($id, Query $query = null): EntityIdInterface
     {
@@ -240,7 +240,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
             ->queryAll(\PDO::FETCH_CLASS);
     }
 
-    public function update(EntityIdInterface $entity)
+    /*public function update(EntityIdInterface $entity)
     {
         ValidationHelper::validateEntity($entity);
         $this->oneById($entity->getId());
@@ -253,7 +253,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         $event = $this->dispatchEntityEvent($entity, EventEnum::AFTER_UPDATE_ENTITY);
 
         //$this->updateById($entity->getId(), $data);
-    }
+    }*/
 
     /*public function updateById($id, $data)
     {
@@ -270,7 +270,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         $queryBuilder->update($data);
     }
 
-    public function deleteById($id)
+    /*public function deleteById($id)
     {
         $entity = $this->oneById($id);
 
@@ -282,6 +282,11 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         }
         
         $event = $this->dispatchEntityEvent($entity, EventEnum::AFTER_DELETE_ENTITY);
+    }*/
+
+    protected function deleteByIdQuery($id) {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->delete($id);
     }
 
     public function updateByQuery(Query $query, array $values)
