@@ -4,7 +4,7 @@ namespace ZnDatabase\Eloquent\Domain\Factories;
 
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\FileSystem\Helpers\FileStorageHelper;
-use ZnCore\Base\Store\Helpers\StoreHelper;
+use ZnLib\Components\Store\Helpers\StoreHelper;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Facades\DbFacade;
 use ZnDatabase\Base\Domain\Libs\TableAlias;
