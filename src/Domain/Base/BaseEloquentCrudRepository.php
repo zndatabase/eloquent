@@ -12,7 +12,6 @@ use ZnCore\Base\Validation\Helpers\ValidationHelper;
 use ZnCore\Domain\Domain\Enums\EventEnum;
 use ZnCore\Domain\Domain\Events\QueryEvent;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
-use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\Query\Enums\OperatorEnum;
 use ZnCore\Domain\QueryFilter\Helpers\FilterModelHelper;
@@ -30,20 +29,17 @@ use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, FindOneUniqueInterface
 {
 
-    use RepositoryRelationTrait;
-
     use CrudRepositoryFindOneTrait;
     use CrudRepositoryFindAllTrait;
     use CrudRepositoryInsertTrait;
     use CrudRepositoryUpdateTrait;
     use CrudRepositoryDeleteTrait;
+    use RepositoryRelationTrait;
 
-    protected $primaryKey = ['id'];
-
-    public function primaryKey()
+    /*public function primaryKey()
     {
         return $this->primaryKey;
-    }
+    }*/
 
     public function forgeQueryByFilter(object $filterModel, Query $query)
     {
@@ -68,7 +64,8 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         return $queryBuilder->count();
     }
 
-    protected function insertRaw($entity): void {
+    protected function insertRaw($entity): void
+    {
         $arraySnakeCase = $this->mapperEncodeEntity($entity);
         try {
             $lastId = $this->getQueryBuilder()->insertGetId($arraySnakeCase);
