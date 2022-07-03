@@ -3,7 +3,7 @@
 namespace ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder;
 
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Str;
+//use Illuminate\Support\Str;
 use ZnCore\Domain\Query\Entities\Join;
 use ZnCore\Domain\Query\Enums\OperatorEnum;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
