@@ -3,8 +3,8 @@
 namespace ZnDatabase\Eloquent\Domain\Base;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Enumerable;
+use ZnCore\Domain\Collection\Libs\Collection;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Domain\Domain\Traits\DispatchEventTrait;
 use ZnCore\Domain\Domain\Traits\ForgeQueryTrait;
