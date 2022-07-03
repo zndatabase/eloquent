@@ -2,7 +2,6 @@
 
 namespace ZnDatabase\Eloquent\Domain\Orm;
 
-use Illuminate\Support\Facades\DB;
 use ZnCore\Domain\EntityManager\Interfaces\OrmInterface;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 
