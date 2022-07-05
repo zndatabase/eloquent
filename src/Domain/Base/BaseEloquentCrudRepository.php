@@ -3,6 +3,7 @@
 namespace ZnDatabase\Eloquent\Domain\Base;
 
 use Illuminate\Database\QueryException;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Text\Helpers\Inflector;
@@ -86,7 +87,7 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
         }
     }
 
-    public function createCollection(Collection $collection)
+    public function createCollection(Enumerable $collection)
     {
         $array = [];
         foreach ($collection as $entity) {
