@@ -3,7 +3,6 @@
 namespace ZnDatabase\Eloquent\Domain\Base;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
-use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Domain\Domain\Traits\DispatchEventTrait;
@@ -11,8 +10,8 @@ use ZnCore\Domain\Domain\Traits\ForgeQueryTrait;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnCore\Domain\Query\Entities\Query;
-use ZnCore\Domain\Repository\Traits\RepositoryMapperTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryDispatchEventTrait;
+use ZnCore\Domain\Repository\Traits\RepositoryMapperTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryQueryTrait;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;

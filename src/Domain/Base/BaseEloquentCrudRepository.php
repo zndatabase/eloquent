@@ -3,13 +3,12 @@
 namespace ZnDatabase\Eloquent\Domain\Base;
 
 use Illuminate\Database\QueryException;
-use ZnCore\Domain\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Text\Helpers\Inflector;
 use ZnCore\Base\Text\Helpers\TextHelper;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Validation\Helpers\ValidationHelper;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Domain\Enums\EventEnum;
 use ZnCore\Domain\Domain\Events\QueryEvent;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
