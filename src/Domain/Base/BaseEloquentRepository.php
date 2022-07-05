@@ -64,7 +64,7 @@ abstract class BaseEloquentRepository implements GetEntityClassInterface
         return $collection;
     }
 
-    protected function findByBuilder(QueryBuilder $queryBuilder): Collection
+    protected function findByBuilder(QueryBuilder $queryBuilder): Enumerable
     {
         $postCollection = $queryBuilder->get();
         $array = $postCollection->toArray();
