@@ -4,9 +4,9 @@ namespace ZnDatabase\Eloquent\Domain\Base;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use ZnCore\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
-use ZnCore\Domain\Domain\Traits\DispatchEventTrait;
-use ZnCore\Domain\Domain\Traits\ForgeQueryTrait;
+use ZnCore\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Domain\Traits\DispatchEventTrait;
+use ZnCore\Domain\Traits\ForgeQueryTrait;
 use ZnCore\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnCore\Query\Entities\Query;
