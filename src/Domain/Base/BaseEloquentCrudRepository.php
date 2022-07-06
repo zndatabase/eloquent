@@ -4,18 +4,12 @@ namespace ZnDatabase\Eloquent\Domain\Base;
 
 use Illuminate\Database\QueryException;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Text\Helpers\Inflector;
-use ZnCore\Text\Helpers\TextHelper;
-use ZnCore\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Validation\Helpers\ValidationHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Domain\Enums\EventEnum;
-use ZnCore\Domain\Domain\Events\QueryEvent;
-use ZnCore\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\Query\Enums\OperatorEnum;
-use ZnCore\Domain\QueryFilter\Helpers\FilterModelHelper;
 use ZnCore\Domain\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
+use ZnCore\Domain\QueryFilter\Traits\ForgeQueryFilterTrait;
+use ZnCore\Domain\QueryFilter\Traits\QueryFilterTrait;
 use ZnCore\Domain\Repository\Interfaces\CrudRepositoryInterface;
 use ZnCore\Domain\Repository\Interfaces\FindOneUniqueInterface;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryDeleteTrait;
@@ -24,6 +18,11 @@ use ZnCore\Domain\Repository\Traits\CrudRepositoryFindOneTrait;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryInsertTrait;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryUpdateTrait;
 use ZnCore\Domain\Repository\Traits\RepositoryRelationTrait;
+use ZnCore\Entity\Helpers\EntityHelper;
+use ZnCore\Text\Helpers\Inflector;
+use ZnCore\Text\Helpers\TextHelper;
+use ZnCore\Validation\Exceptions\UnprocessibleEntityException;
+use ZnCore\Validation\Helpers\ValidationHelper;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 
 abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, FindOneUniqueInterface
@@ -35,26 +34,12 @@ abstract class BaseEloquentCrudRepository extends BaseEloquentRepository impleme
     use CrudRepositoryUpdateTrait;
     use CrudRepositoryDeleteTrait;
     use RepositoryRelationTrait;
+    use ForgeQueryFilterTrait;
 
     /*public function primaryKey()
     {
         return $this->primaryKey;
     }*/
-
-    public function forgeQueryByFilter(object $filterModel, Query $query)
-    {
-        FilterModelHelper::validate($filterModel);
-        FilterModelHelper::forgeOrder($query, $filterModel);
-        $query = $this->forgeQuery($query);
-        $event = new QueryEvent($query);
-        $event->setFilterModel($filterModel);
-        $this
-            ->getEventDispatcher()
-            ->dispatch($event, EventEnum::BEFORE_FORGE_QUERY_BY_FILTER);
-        $schema = $this->getSchema();
-        $columnList = $schema->getColumnListing($this->tableNameAlias());
-        FilterModelHelper::forgeCondition($query, $filterModel, $columnList);
-    }
 
     public function count(Query $query = null): int
     {
