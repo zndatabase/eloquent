@@ -2,7 +2,7 @@
 
 namespace ZnDatabase\Eloquent\Domain\Orm;
 
-use ZnCore\Domain\EntityManager\Interfaces\OrmInterface;
+use ZnCore\EntityManager\Interfaces\OrmInterface;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 
 class EloquentOrm implements OrmInterface
