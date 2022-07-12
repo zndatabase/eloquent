@@ -22,7 +22,7 @@ class ManagerFactory
 
     public static function createManagerFromConnections(array $connections): Manager
     {
-        $config = StoreHelper::load($_ENV['ROOT_DIRECTORY'] . '/' . $_ENV['ELOQUENT_CONFIG_FILE']);
+        $config = StoreHelper::load($_ENV['ELOQUENT_CONFIG_FILE']);
 //        $config = LoadHelper::loadConfig($_ENV['ELOQUENT_CONFIG_FILE']);
         $connectionMap = ArrayHelper::getValue($config, 'connection.connectionMap', []);
 
