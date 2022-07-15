@@ -4,13 +4,13 @@ namespace ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder;
 
 use Illuminate\Database\Query\Builder;
 //use Illuminate\Support\Str;
-use ZnCore\Query\Entities\Join;
-use ZnCore\Query\Enums\OperatorEnum;
+use ZnDomain\Query\Entities\Join;
+use ZnDomain\Query\Enums\OperatorEnum;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnDatabase\Base\Domain\Helpers\DbHelper;
 use ZnDatabase\Base\Domain\Interfaces\QueryBuilderInterface;
-use ZnCore\Query\Entities\Query;
-use ZnCore\Query\Entities\Where;
+use ZnDomain\Query\Entities\Query;
+use ZnDomain\Query\Entities\Where;
 
 class EloquentQueryBuilderHelper implements QueryBuilderInterface
 {

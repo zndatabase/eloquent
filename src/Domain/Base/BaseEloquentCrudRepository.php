@@ -5,8 +5,8 @@ namespace ZnDatabase\Eloquent\Domain\Base;
 use Illuminate\Database\QueryException;
 use ZnCore\Arr\Helpers\ArrayHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
-use ZnCore\Query\Entities\Query;
-use ZnCore\Query\Enums\OperatorEnum;
+use ZnDomain\Query\Entities\Query;
+use ZnDomain\Query\Enums\OperatorEnum;
 use ZnDomain\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
 use ZnDomain\QueryFilter\Traits\ForgeQueryFilterTrait;
 use ZnDomain\QueryFilter\Traits\QueryFilterTrait;
@@ -18,11 +18,11 @@ use ZnDomain\Repository\Traits\CrudRepositoryFindOneTrait;
 use ZnDomain\Repository\Traits\CrudRepositoryInsertTrait;
 use ZnDomain\Repository\Traits\CrudRepositoryUpdateTrait;
 use ZnDomain\Repository\Traits\RepositoryRelationTrait;
-use ZnCore\Entity\Helpers\EntityHelper;
+use ZnDomain\Entity\Helpers\EntityHelper;
 use ZnCore\Text\Helpers\Inflector;
 use ZnCore\Text\Helpers\TextHelper;
-use ZnCore\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Validation\Helpers\ValidationHelper;
+use ZnDomain\Validator\Exceptions\UnprocessibleEntityException;
+use ZnDomain\Validator\Helpers\ValidationHelper;
 use ZnDatabase\Eloquent\Domain\Helpers\QueryBuilder\EloquentQueryBuilderHelper;
 
 abstract class BaseEloquentCrudRepository extends BaseEloquentRepository implements CrudRepositoryInterface, ForgeQueryByFilterInterface, FindOneUniqueInterface

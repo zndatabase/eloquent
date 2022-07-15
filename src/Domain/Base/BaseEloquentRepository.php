@@ -9,7 +9,7 @@ use ZnDomain\Domain\Traits\DispatchEventTrait;
 use ZnDomain\Domain\Traits\ForgeQueryTrait;
 use ZnDomain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnDomain\EntityManager\Traits\EntityManagerAwareTrait;
-use ZnCore\Query\Entities\Query;
+use ZnDomain\Query\Entities\Query;
 use ZnDomain\Repository\Traits\RepositoryDispatchEventTrait;
 use ZnDomain\Repository\Traits\RepositoryMapperTrait;
 use ZnDomain\Repository\Traits\RepositoryQueryTrait;
