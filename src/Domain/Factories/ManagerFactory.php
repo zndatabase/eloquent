@@ -44,6 +44,7 @@ class ManagerFactory
     {
         foreach ($connections as $connectionName => $connectionConfig) {
             if ($connectionConfig['driver'] == DbDriverEnum::SQLITE) {
+                $isExists = file_exists($connectionConfig['database']);
                 FileStorageHelper::touchFile($connectionConfig['database']);
             }
         }
